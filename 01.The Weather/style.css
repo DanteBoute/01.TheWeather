@@ -14,14 +14,20 @@ h1{
 }
 .inputLocation{
     justify-content: center;
-    margin-bottom: 2%;
+    margin-bottom: 1%;
     border: solid;
     width: 20%;
     height: 30px;
     border-radius: 25px;
+    background-color: aquamarine;
 }
 .labelLocation{
     width: 100%;
+}
+.locationSearchBtn{
+    border-radius: 25px;
+    margin-bottom: 2%;
+    width: 100px;
 }
 .weatherContainer {
     width: 100%;
@@ -46,7 +52,7 @@ h1{
     height: 200px;
     justify-content: center;
     align-items: center;
-    
+
 }
 .dayOne{
     width: 33.3%;
