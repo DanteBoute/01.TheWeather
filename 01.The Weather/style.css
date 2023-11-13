@@ -1,0 +1,59 @@
+body {
+    text-align: center;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+h1{
+    width: 100%;
+    background-color: lightgrey;
+    padding-bottom: 1%;
+    padding-top: 1%;
+}
+::placeholder{
+    text-align: center;
+}
+.inputLocation{
+    justify-content: center;
+    margin-bottom: 2%;
+    border: solid;
+    width: 20%;
+    height: 30px;
+    border-radius: 25px;
+}
+.labelLocation{
+    width: 100%;
+}
+.weatherContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2%;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    background-color: lightblue;
+}
+.weatherToday {
+    width: 50%;
+}
+.weatherTomorrow {
+    width: 50%;
+}
+.nextThreeDays {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: lightcoral;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    
+}
+.dayOne{
+    width: 33.3%;
+}
+.dayTwo{
+    width: 33.3%;
+}
+.dayThree{
+    width: 33.3%;
+}
