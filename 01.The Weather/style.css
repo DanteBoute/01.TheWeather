@@ -40,26 +40,12 @@ h1{
     background-color: lightblue;
 }
 .weatherToday {
-    width: 50%;
+    width: 100%;
 }
-.weatherTomorrow {
-    width: 50%;
+.weatherForecast {
+    width: 100%;
 }
-.nextThreeDays {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: lightcoral;
-    height: 200px;
-    justify-content: center;
-    align-items: center;
+.tomorrowDiv, .dayThreeDiv, .dayFourDiv, .dayFiveDiv, .daySixDiv, .DaySevenDiv {
+    width: 100%;
 
-}
-.dayOne{
-    width: 33.3%;
-}
-.dayTwo{
-    width: 33.3%;
-}
-.dayThree{
-    width: 33.3%;
 }

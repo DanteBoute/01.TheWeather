@@ -5,29 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Weather</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
 </head>
 <body>
     <h1>The Weather</h1>
     <div class="locationSearch">
-    <input class="inputLocation" type="text" placeholder="Search city">
+    <input value="ghent" id="inputLocation" type="text" placeholder="Search city">
     <br>
     <button class="locationSearchBtn">Search</button>
     <br>
-    <!-- <label class="labelLocation" for="input">Location</label> -->
     </div>
+
     <div class="weatherContainer">
         <div class="weatherToday">
-    <h2>Today</h2>
         </div>
-        <div class="weatherTomorrow">
-    <h2>Tomorrow</h2>
-    </div>
-    </div>
-    <div class="nextThreeDays">
-        <h2 class="dayOne">Day 1</h2>
-        <h2 class="dayTwo">Day 2</h2>
-        <h2 class="dayThree"> Day 3</h2>
+        <div class="weatherForecast">
+        </div>
+        <div class="tomorrowDiv"></div>
+        <div class="dayThreeDiv"></div>
+        <div class="dayFourDiv"></div>
+        <div class="dayFiveDiv"></div>
+        <div class="daySixDiv"></div>
+        <div class="daySevenDiv"></div>
     </div>
     
 </body>
