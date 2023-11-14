@@ -1,51 +1,53 @@
 body {
     text-align: center;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
-h1{
+
+.weatherCard{
     width: 100%;
-    background-color: lightgrey;
-    padding-bottom: 1%;
-    padding-top: 1%;
-}
-::placeholder{
+    background: linear-gradient(135deg, #00feba, #5b548a);
+    color: #fff;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border-radius: 20px;
+    padding: 35px 40px;
     text-align: center;
+    display: none;
 }
-.inputLocation{
-    justify-content: center;
-    margin-bottom: 1%;
-    border: solid;
-    width: 20%;
-    height: 30px;
-    border-radius: 25px;
-    background-color: aquamarine;
+.dayName{
+    font-size: 45px;
+    text-align: center;
+    padding: 5px;
 }
-.labelLocation{
-    width: 100%;
-}
-.locationSearchBtn{
-    border-radius: 25px;
-    margin-bottom: 2%;
-    width: 100px;
-}
-.weatherContainer {
+.locationSearch{
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 2%;
-    height: 200px;
-    justify-content: center;
     align-items: center;
-    background-color: lightblue;
+    justify-content: space-between;
 }
-.weatherToday {
-    width: 100%;
+.locationSearch input{
+    border: 0;
+    outline: 0;
+    background: linear-gradient(135deg, #00feba, #5b548a);
+    color: #555;
+    padding: 10px 25px;
+    height: 60px;
+    border-radius: 30px;
+    flex: 1;
+    margin-right: 1;
+    font-size: 18px;
 }
-.weatherForecast {
-    width: 100%;
+.locationSearchBtn{
+    border: 0;
+    outline: 0;
+    background: linear-gradient(135deg, #00feba, #5b548a);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    margin-left: 10px;
 }
-.tomorrowDiv, .dayThreeDiv, .dayFourDiv, .dayFiveDiv, .daySixDiv, .DaySevenDiv {
-    width: 100%;
-
+.locationSearchBtn:hover{
+    background-color: lightyellow;
 }
