@@ -413,21 +413,20 @@ const cityInput = document.querySelector('#inputLocation');
 const searchBtn = document.querySelector('.locationSearchBtn');
 const weatherForecastDiv = document.querySelector('.weatherForecast');
 const userInput = cityInput.value;
-const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-
-
+const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
 const d = new Date();
-let day = weekday[d.getDay()];
+let day = weekdays[d.getDay()];
 console.log(day);
 
-
+// Getting coordinates for the city search
 async function getCityData (userInput){
 	const response = await fetch('https://geocoding-api.open-meteo.com/v1/search?name=' + userInput + '&count=10&language=en&format=json')
 	    const data = await response.json();
 		return data.results[0];
 		}
 
+// Getting city weather data using coordinates
 async function getWeatherData(cityName){
 	const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=' + cityName.latitude + '&longitude=' + cityName.longitude + '&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min')
 		const weatherData = await response.json();
@@ -442,12 +441,43 @@ async function getWeather (userInput){
 	return getWeatherInfo;
 }
 
+// Making the weathercards
+function addWeatherCards(weatherData) {
+	weatherData.daily.forEach((dayData, index) => {
+		const dayDiv = document.createElement('div');
+		dayDiv.classList.add('weatherCard');
+
+		const dayTitle = document.createElement('h2');
+		dayTitle.textContent = weekdays[(day + index) % 7];
+
+		const maxTemp = document.createElement('h4');
+		maxTemp.textContent = `Max: ${dayData.temperature_2m_max}`;
+
+		const minTemp = document.createElement('h4');
+		maxTemp.textContent = `Min: ${dayData.temperature_2m_min}`;
+
+		const typeOfWeather = document.createElement('h3');
+		typeOfWeather.textContent = `Weather Code: ${dayData.weather_code}`;
+
+		dayDiv.appendChild(dayTitle);
+		dayDiv.appendChild(maxTemp);
+		dayDiv.appendChild(minTemp);
+		dayDiv.appendChild(typeOfWeather);
+
+		weatherForecastDiv.appendChild(dayDiv);
+})
+};
+
+// Making eventlisteners fot Click and Enter
+
 searchBtn.addEventListener('click', function() {
-	getWeather(cityInput.value)
+	getWeather(cityInput.value);
+	addWeatherCards(cityInput);
 }
 )
 cityInput.addEventListener('keyup', (event) => {
-	if (event.key === 'enter') {
+	if (event.key === 'Enter') {
 		getWeather(cityInput.value)
+		addWeatherCards(cityInput.value);
 	}
 })
