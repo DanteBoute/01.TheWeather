@@ -281,119 +281,173 @@ const weatherCodeArray = {
 	}
 }
 
-const searchBtn = document.querySelector(".locationSearchBtn");
-const searchField = document.querySelector("#inputLocation");
-const forecastDiv = document.querySelector(".weatherForecast");
+// const searchBtn = document.querySelector(".locationSearchBtn");
+// const searchField = document.querySelector("#inputLocation");
+// const forecastDiv = document.querySelector(".weatherForecast");
 
-// Create div elements for each day
-const todayDiv = createWeatherCard("Today");
-const tomorrowDiv = createWeatherCard("Tomorrow");
-const dayThreeDiv = createWeatherCard("DayThree");
-const dayFourDiv = createWeatherCard("DayFour");
-const dayFiveDiv = createWeatherCard("DayFive");
-const daySixDiv = createWeatherCard("DaySix");
-const daySevenDiv = createWeatherCard("DaySeven");
-const dayArray = [todayDiv, tomorrowDiv, dayThreeDiv, dayFourDiv, dayFiveDiv, daySixDiv, daySevenDiv];
+// // Create div elements for each day
+// const todayDiv = createWeatherCard("Today");
+// const tomorrowDiv = createWeatherCard("Tomorrow");
+// const dayThreeDiv = createWeatherCard("DayThree");
+// const dayFourDiv = createWeatherCard("DayFour");
+// const dayFiveDiv = createWeatherCard("DayFive");
+// const daySixDiv = createWeatherCard("DaySix");
+// const daySevenDiv = createWeatherCard("DaySeven");
+// const dayArray = [todayDiv, tomorrowDiv, dayThreeDiv, dayFourDiv, dayFiveDiv, daySixDiv, daySevenDiv];
 
-// Append the day divs to the forecastDiv
-forecastDiv.appendChild(todayDiv);
-forecastDiv.appendChild(tomorrowDiv);
-forecastDiv.appendChild(dayThreeDiv);
-forecastDiv.appendChild(dayFourDiv);
-forecastDiv.appendChild(dayFiveDiv);
-forecastDiv.appendChild(daySixDiv);
-forecastDiv.appendChild(daySevenDiv);
+// // Append the day divs to the forecastDiv
+// forecastDiv.appendChild(todayDiv);
+// forecastDiv.appendChild(tomorrowDiv);
+// forecastDiv.appendChild(dayThreeDiv);
+// forecastDiv.appendChild(dayFourDiv);
+// forecastDiv.appendChild(dayFiveDiv);
+// forecastDiv.appendChild(daySixDiv);
+// forecastDiv.appendChild(daySevenDiv);
 
-const currentDate = new Date();
-const dayOfWeek = currentDate.getDay();
-const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const weekdayName = weekdays[dayOfWeek];
+// const currentDate = new Date();
+// const dayOfWeek = currentDate.getDay();
+// const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+// const weekdayName = weekdays[dayOfWeek];
 
-const getTemperature = (cityInput) => {
-    console.log(cityInput);
-    fetch('https://geocoding-api.open-meteo.com/v1/search?name=' + cityInput + '&count=10&language=en&format=json')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.results[0]);
-            fetch('https://api.open-meteo.com/v1/forecast?latitude=' + data.results[0].latitude + '&longitude=' + data.results[0].longitude + '&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min')
-                .then(response => response.json())
-                .then(data => {
-                    const dailyMaxTemp = data.daily.temperature_2m_max;
-                    const dailyMinTemp = data.daily.temperature_2m_min;
-                    const weatherCodes = data.daily.weather_code;
-                    console.log(weatherCodes);
+// const getTemperature = (cityInput) => {
+//     console.log(cityInput);
+//     fetch('https://geocoding-api.open-meteo.com/v1/search?name=' + cityInput + '&count=10&language=en&format=json')
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log(data.results[0]);
+//             fetch('https://api.open-meteo.com/v1/forecast?latitude=' + data.results[0].latitude + '&longitude=' + data.results[0].longitude + '&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min')
+//                 .then(response => response.json())
+//                 .then(data => {
+//                     const dailyMaxTemp = data.daily.temperature_2m_max;
+//                     const dailyMinTemp = data.daily.temperature_2m_min;
+//                     const weatherCodes = data.daily.weather_code;
+//                     console.log(weatherCodes);
 
-                    // Display forecast for the next 6 days
-                    dayArray.forEach((dayDiv, index) => {
-                        const dayName = weekdays[(dayOfWeek + index) % 7]; // Wrap around to the beginning of the array
-                        const maxTemp = dailyMaxTemp[index];
-                        const minTemp = dailyMinTemp[index];
-                        const weatherCodesPerDay = weatherCodes[index];
+//                     // Display forecast for the next 6 days
+//                     dayArray.forEach((dayDiv, index) => {
+//                         const dayName = weekdays[(dayOfWeek + index) % 7]; // Wrap around to the beginning of the array
+//                         const maxTemp = dailyMaxTemp[index];
+//                         const minTemp = dailyMinTemp[index];
+//                         const weatherCodesPerDay = weatherCodes[index];
 
-                        // Update the content of the day card
-                        dayDiv.querySelector(".dayName").textContent = dayName;
-                        dayDiv.querySelector(".maxTemp").textContent = `Max Temperature: ${maxTemp} °C`;
-                        dayDiv.querySelector(".minTemp").textContent = `Min Temperature: ${minTemp} °C`;
-                        const isDay = true; // Assume it's day, you can modify this based on your logic
-                        dayDiv.querySelector(".weatherCondition").textContent = getWeatherCondition(weatherCodesPerDay, isDay);
-                        dayDiv.style.display = 'block';
-                    });
-                });
-        });
-};
+//                         // Update the content of the day card
+//                         dayDiv.querySelector(".dayName").textContent = dayName;
+//                         dayDiv.querySelector(".maxTemp").textContent = `Max Temperature: ${maxTemp} °C`;
+//                         dayDiv.querySelector(".minTemp").textContent = `Min Temperature: ${minTemp} °C`;
+//                         const isDay = true; // Assume it's day, you can modify this based on your logic
+//                         dayDiv.querySelector(".weatherCondition").textContent = getWeatherCondition(weatherCodesPerDay, isDay);
+//                         dayDiv.style.display = 'block';
+//                     });
+//                 });
+//         });
+// };
 
-// Helper function to create a weather card for each day
-function getWeatherCondition(weatherCodesPerDay, isDay) {
-    const weatherInfo = weatherCodeArray[weatherCodesPerDay];
-    if (!weatherInfo) return 'Unknown';
+// // Helper function to create a weather card for each day
+// function getWeatherCondition(weatherCodesPerDay, isDay) {
+//     const weatherInfo = weatherCodeArray[weatherCodesPerDay];
+//     if (!weatherInfo) return 'Unknown';
 
-    const timeOfDay = isDay ? 'day' : 'night';
-    return weatherInfo[timeOfDay].description;
+//     const timeOfDay = isDay ? 'day' : 'night';
+//     return weatherInfo[timeOfDay].description;
+// }
+
+// function createWeatherCard(dayName) {
+//     const dayDiv = document.createElement('div');
+//     dayDiv.classList.add('weatherCard');
+
+//     const dayNameDiv = document.createElement('div');
+//     dayNameDiv.classList.add('dayName');
+//     dayNameDiv.textContent = dayName;
+//     dayDiv.appendChild(dayNameDiv);
+
+//     const maxTempDiv = document.createElement('div');
+//     maxTempDiv.classList.add('maxTemp');
+//     dayDiv.appendChild(maxTempDiv);
+
+//     const minTempDiv = document.createElement('div');
+//     minTempDiv.classList.add('minTemp');
+//     dayDiv.appendChild(minTempDiv);
+
+//     const weatherConditionDiv = document.createElement('div');
+//     weatherConditionDiv.classList.add('weatherCondition');
+//     dayDiv.appendChild(weatherConditionDiv);
+
+//     const weatherCodesPerDay = weatherCodes;
+//     const weatherInfo = weatherCodeArray[weatherCodesPerDay];
+//     if (weatherInfo) {
+//         const timeOfDay = 'day';
+//         const imageSrc = weatherInfo[timeOfDay].image;
+
+//         const weatherIcon = document.createElement('img');
+//         weatherIcon.src = imageSrc;
+//         weatherIcon.alt = getWeatherCondition(weatherCodesPerDay);
+//         dayDiv.appendChild(weatherIcon);
+//     }
+
+
+//     return dayDiv;
+// }
+
+// searchBtn.addEventListener('click', function () {
+//     getTemperature(searchField.value);
+// });
+
+// searchField.addEventListener('keyup', (event) => {
+//     if (event.code === 'Enter') {
+//         getTemperature(searchField.value);
+//     }
+// });
+
+// TODO:
+// Insert city
+
+
+// Click search or enter key to submit
+// Use API to get long and lat of city Input
+// use long and lat to get weather conditions for that place
+// Make an array of the weekdays
+// Make card for each day of the week
+// insert name of the week into card
+// insert other data into card.
+const cityInput = document.querySelector('#inputLocation');
+const searchBtn = document.querySelector('.locationSearchBtn');
+const weatherForecastDiv = document.querySelector('.weatherForecast');
+const userInput = cityInput.value;
+const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+
+
+const d = new Date();
+let day = weekday[d.getDay()];
+console.log(day);
+
+
+async function getCityData (userInput){
+	const response = await fetch('https://geocoding-api.open-meteo.com/v1/search?name=' + userInput + '&count=10&language=en&format=json')
+	    const data = await response.json();
+		return data.results[0];
+		}
+
+async function getWeatherData(cityName){
+	const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=' + cityName.latitude + '&longitude=' + cityName.longitude + '&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min')
+		const weatherData = await response.json();
+		return weatherData;
 }
 
-function createWeatherCard(dayName) {
-    const dayDiv = document.createElement('div');
-    dayDiv.classList.add('weatherCard');
+async function getWeather (userInput){
+	const coordinates = await getCityData(userInput);
 
-    const dayNameDiv = document.createElement('div');
-    dayNameDiv.classList.add('dayName');
-    dayNameDiv.textContent = dayName;
-    dayDiv.appendChild(dayNameDiv);
-
-    const maxTempDiv = document.createElement('div');
-    maxTempDiv.classList.add('maxTemp');
-    dayDiv.appendChild(maxTempDiv);
-
-    const minTempDiv = document.createElement('div');
-    minTempDiv.classList.add('minTemp');
-    dayDiv.appendChild(minTempDiv);
-
-    const weatherConditionDiv = document.createElement('div');
-    weatherConditionDiv.classList.add('weatherCondition');
-    dayDiv.appendChild(weatherConditionDiv);
-
-    const weatherCodesPerDay = 0; // You might need to adjust this based on your logic
-    const weatherInfo = weatherCodeArray[weatherCodesPerDay];
-    if (weatherInfo) {
-        const timeOfDay = 'day';
-        const imageSrc = weatherInfo[timeOfDay].image;
-
-        const weatherIcon = document.createElement('img');
-        weatherIcon.src = imageSrc;
-        weatherIcon.alt = getWeatherCondition(weatherCodesPerDay);
-        dayDiv.appendChild(weatherIcon);
-    }
-
-
-    return dayDiv;
+	const getWeatherInfo = await getWeatherData(coordinates);
+	console.log(getWeatherInfo)
+	return getWeatherInfo;
 }
 
-searchBtn.addEventListener('click', function () {
-    getTemperature(searchField.value);
-});
-
-searchField.addEventListener('keyup', (event) => {
-    if (event.code === 'Enter') {
-        getTemperature(searchField.value);
-    }
-});
+searchBtn.addEventListener('click', function() {
+	getWeather(cityInput.value)
+}
+)
+cityInput.addEventListener('keyup', (event) => {
+	if (event.key === 'enter') {
+		getWeather(cityInput.value)
+	}
+})
