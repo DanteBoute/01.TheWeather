@@ -413,11 +413,10 @@ const cityInput = document.querySelector('#inputLocation');
 const searchBtn = document.querySelector('.locationSearchBtn');
 const weatherForecastDiv = document.querySelector('.weatherForecast');
 const userInput = cityInput.value;
-const weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-
-const d = new Date();
-let day = weekdays[d.getDay()];
-console.log(day);
+const currentDate = new Date();
+const dayOfWeek = currentDate.getDay();
+const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const weekdayName = weekdays[dayOfWeek];
 
 // Getting coordinates for the city search
 async function getCityData (userInput){
@@ -433,31 +432,36 @@ async function getWeatherData(cityName){
 		return weatherData;
 }
 
+// Creating a function to call when eventlistener activates
 async function getWeather (userInput){
 	const coordinates = await getCityData(userInput);
 
 	const getWeatherInfo = await getWeatherData(coordinates);
-	console.log(getWeatherInfo)
-	return getWeatherInfo;
+
+	addWeatherCards(getWeatherInfo);
+
+	// console.log(getWeatherInfo)
+	// return getWeatherInfo;
 }
 
 // Making the weathercards
-function addWeatherCards(weatherData) {
-	weatherData.daily.forEach((dayData, index) => {
+function addWeatherCards(info) {
+	console.log(info.daily)
+	weekdays.forEach((day, index) => {
 		const dayDiv = document.createElement('div');
 		dayDiv.classList.add('weatherCard');
 
 		const dayTitle = document.createElement('h2');
-		dayTitle.textContent = weekdays[(day + index) % 7];
+		dayTitle.textContent = weekdays[(dayOfWeek + index) % 7];
 
 		const maxTemp = document.createElement('h4');
-		maxTemp.textContent = `Max: ${dayData.temperature_2m_max}`;
+		maxTemp.textContent = `Max: ${info.daily.temperature_2m_max[index]} °C`;
 
 		const minTemp = document.createElement('h4');
-		maxTemp.textContent = `Min: ${dayData.temperature_2m_min}`;
+		minTemp.textContent = `Min: ${info.daily.temperature_2m_min[index]} °C`;
 
 		const typeOfWeather = document.createElement('h3');
-		typeOfWeather.textContent = `Weather Code: ${dayData.weather_code}`;
+		typeOfWeather.textContent = `Weather Code: ${info.daily.weather_code[index]}`;
 
 		dayDiv.appendChild(dayTitle);
 		dayDiv.appendChild(maxTemp);
@@ -465,19 +469,19 @@ function addWeatherCards(weatherData) {
 		dayDiv.appendChild(typeOfWeather);
 
 		weatherForecastDiv.appendChild(dayDiv);
+		dayDiv.style.display = 'block';
 })
 };
 
-// Making eventlisteners fot Click and Enter
+
+// Making eventlisteners for Click and Enter
 
 searchBtn.addEventListener('click', function() {
 	getWeather(cityInput.value);
-	addWeatherCards(cityInput);
 }
 )
 cityInput.addEventListener('keyup', (event) => {
 	if (event.key === 'Enter') {
 		getWeather(cityInput.value)
-		addWeatherCards(cityInput.value);
 	}
 })
