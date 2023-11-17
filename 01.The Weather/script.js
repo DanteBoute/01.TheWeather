@@ -332,10 +332,18 @@ async function getWeather (userInput){
 function addWeatherCards(info) {
 	console.log(info.daily)
 	weekdays.forEach((weekday, index) => {
+
+		while (weatherForecastDiv.lastChild) {
+			weatherForecastDiv.removeChild(weatherForecastDiv.lastChild);
+		};
+		
 		const dayDiv = document.createElement('div');
 		dayDiv.classList.add('weatherCard');
 
-		const dayTitle = document.createElement('h2');
+		if (index === 0) dayDiv.classList.add("mainCard");
+		const mainCard = document.querySelector(".mainCard")
+
+		const dayTitle = document.createElement('h3');
 		dayTitle.textContent = weekdays[(dayOfWeek + index) % 7];
 
 		const maxTemp = document.createElement('h4');
@@ -344,16 +352,24 @@ function addWeatherCards(info) {
 		const minTemp = document.createElement('h4');
 		minTemp.textContent = `Min: ${info.daily.temperature_2m_min[index]} °C`;
 		
+		const weatherType = document.createElement('h4');
+		weatherType.classList.add('weatherType');
+		weatherType.textContent = weatherCodeArray[info.daily.weather_code[index]].day.description;
 		const imageIcon = document.createElement('img');
+		imageIcon.classList.add('weatherIcons')
 		imageIcon.src = weatherCodeArray[info.daily.weather_code[index]].day.image;
+		if (index === 0) imageIcon.classList.add("mainIcon");
 		
+		const subtitleCity = document.querySelector('h2');
+		subtitleCity.textContent = cityInput.value;
+		subtitleCity.style.display = 'block';
 
 		dayDiv.appendChild(dayTitle);
 		dayDiv.appendChild(imageIcon);
+		dayDiv.appendChild(weatherType)
 		dayDiv.appendChild(maxTemp);
 		dayDiv.appendChild(minTemp);
-		
-
+	
 		weatherForecastDiv.appendChild(dayDiv);
 		
 		dayDiv.style.display = 'block';
@@ -364,9 +380,7 @@ function addWeatherCards(info) {
 
 searchBtn.addEventListener('click', function() {
 	getWeather(cityInput.value);
-	const subtitleCity = document.querySelector('.subtitleCity');
-		subtitleCity.textContent = cityInput.value;
-		subtitleCity.display = 'block';
+	
 })
 
 cityInput.addEventListener('keyup', (event) => {

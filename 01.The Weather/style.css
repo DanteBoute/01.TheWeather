@@ -16,22 +16,28 @@ h1{
     font-size: 100px;
     opacity: 70%;
 }
-.subtitleCity{
+h2{
     color: lightgray;
     font-size: 70px;
     opacity: 50%;
     display: none;
 }
+.weatherForecast{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
 .weatherCard{
-    width: 40%;
-    background: linear-gradient(135deg, #093226, #5b548a);
+    width: 200px;
+    background: linear-gradient(135deg, #6D7E84, #060A11);
     color: #fff;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin: 25px;
     border-radius: 20px;
     padding: 35px 40px;
     text-align: center;
     display: none;
+
 }
 .dayName{
     font-size: 45px;
@@ -47,7 +53,7 @@ h1{
 .locationSearch input{
     border: 0;
     outline: 0;
-    background: linear-gradient(135deg, #2b6657, #5b548a);
+    background: linear-gradient(135deg, #6D7E84, #060A11);
     color: white;
     padding: 10px 25px;
     height: 60px;
@@ -56,6 +62,10 @@ h1{
     margin-right: 1;
     font-size: 18px;
     margin-top: 50px;
+    margin-bottom: 50px;
+}
+.locationSearch input:hover{
+    background: linear-gradient(135deg, #292d34, #d5e1e6);
 }
 ::placeholder{
     color: white;
@@ -64,16 +74,17 @@ h1{
 .locationSearchBtn{
     border: 0;
     outline: 0;
-    background: linear-gradient(135deg, #00feba, #5b548a);
+    background: linear-gradient(135deg, #6D7E84, #060A11);
     border-radius: 50%;
     width: 80px;
     height: 80px;
     cursor: pointer;
     margin-left: 10px;
     margin-top: 50px;
+    margin-bottom: 50px;
 }
 .locationSearchBtn:hover{
-    background-color: lightyellow;
+    background: linear-gradient(135deg, #292d34, #d5e1e6);
 }
 .bannerImage{
     display: flex;
@@ -85,4 +96,18 @@ h1{
     background-size: contain;
     justify-content: center;
     align-items: center;
+}
+.mainCard{
+    width: 100%;
+    font-size: 35px;
+}
+.weatherIcons{
+    width: 150px;
+    image-rendering: crisp-edges;
+}
+.mainIcon{
+    width: 300px;
+}
+.weatherType{
+    margin-bottom: 10px;
 }
