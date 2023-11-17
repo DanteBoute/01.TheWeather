@@ -89,8 +89,8 @@ h2{
 .bannerImage{
     display: flex;
     flex-direction: column;
-    background-image: url(images/The\ Weather.png);
-    height: 300px;
+    background-image: url(images/The\ WeatherBanner.png);
+    height: 280px;
     width: 100%;
     background-attachment: fixed;
     background-size: contain;
